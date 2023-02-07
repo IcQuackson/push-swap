@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   argv_checkers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedgonca <pedgonca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: quackson <quackson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:40:17 by pedgonca          #+#    #+#             */
-/*   Updated: 2023/02/03 14:53:37 by pedgonca         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:13:34 by quackson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "others.h"
 #include <limits.h>
 
 #include <stdio.h>
 
-int	check_if_int_duplicate(int argc, char **argv)
+int	check_arguments(int argc, char **argv)
 {
 	int		i;
 	int		*values;
 	long	content;
-	int		is_duplicate;
 
 	values = malloc((argc - 1) * sizeof(int));
 	if (!values)
@@ -29,23 +28,16 @@ int	check_if_int_duplicate(int argc, char **argv)
 	while (i < argc)
 	{
 		content = ft_atol((const char *) argv[i]);
-		if (content == LONG_MAX)
+		if (content == LONG_MAX || content > INT_MAX || content < INT_MIN)
 		{
 			write(2, "Error\n", 6);
-			return (0);
-		}
-		if (content > INT_MAX)
-		{
-			printf("content > INT_MAX\n");
+			//printf("errrrooooo: %ld\n", content);
 			return (0);
 		}
 		values[i - 1] = (int) content;
 		i++;
 	}
-	printf("Still here\n");
-	is_duplicate = check_if_duplicate(argc - 1, values);
-	printf("is_duplicate = %d\n", is_duplicate);
-	return (is_duplicate);
+	return (check_if_duplicate(argc - 1, values));
 }
 
 int	check_if_duplicate(int n, int *values)
