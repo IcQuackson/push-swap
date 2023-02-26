@@ -1,7 +1,7 @@
 # push-swap
 This project will make you sort data on a stack, with a limited set of instructions, using the lowest possible number of actions. To succeed you’ll have to manipulate various types of algorithms and choose the most appropriate solution (out of many) for an optimized data sorting.
 
-To sort between 5 and 100 elements I used the following algorithm:
+To sort between 5 and 100 elements I used the following algorithm:\n
 -Divide the elements in the stack in 5 partitions;
 -Send the elements of one partition before sending the ones from the next partition. The smallest elements get pushed to stack B first.
 -After stack A is empty keep pushing the max element in stack B until its empty.
