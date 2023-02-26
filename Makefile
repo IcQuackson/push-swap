@@ -1,95 +1,70 @@
-
-NAME = push_swap.a
+# Compiler settings
 CC = cc
-RM = rm -f
-FLAGS = -g -Wall -Werror -Wextra
-AR	= ar rcs
+CFLAGS = -Wall -Wextra -Werror -g
 
-OBJS = $(SRC:.c=.o)
-lst_operations_SRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstclear.c
-lst_operations_PATH = lst_operations/
-lst_operations_OBJS = $(lst_operations_SRCS:.c=.o)
+# Directories
+SRCDIR = src
+HIGH_LVL = $(SRCDIR)/mandatory/high_level_operations
+LST_OPS = $(SRCDIR)/mandatory/lst_operations
+SMART_OPS = $(SRCDIR)/mandatory/smart_operations
+SORT_OPS = $(SRCDIR)/mandatory/sorting_operations
+STACK_OPS = $(SRCDIR)/mandatory/stack_operations
+UTILS = $(SRCDIR)/mandatory/utils
+OBJDIR = obj
 
-STACK_OPS_SRCS = high_level_operations1.c high_level_operations2.c high_level_operations3.c operations.c double_operations.c
-STACK_OPS_PATH = stack_operations/
-STACK_OPS_OBJS = $(STACK_OPS_SRCS:.c=.o)
+# Source files
+SRCS = $(SRCDIR)/mandatory/main.c \
+	   $(HIGH_LVL)/double_operations.c $(HIGH_LVL)/high_level_operations1.c $(HIGH_LVL)/high_level_operations2.c $(HIGH_LVL)/high_level_operations3.c \
+	   $(LST_OPS)/ft_lstadd_back.c $(LST_OPS)/ft_lstadd_front.c $(LST_OPS)/ft_lstclear.c $(LST_OPS)/ft_lstlast.c $(LST_OPS)/ft_lstnew.c $(LST_OPS)/ft_lstsize.c $(LST_OPS)/stack_operations.c \
+	   $(SMART_OPS)/smart_operations.c $(SMART_OPS)/smart_operations2.c \
+	   $(SORT_OPS)/sort.c $(SORT_OPS)/sort_100.c $(SORT_OPS)/sort_500.c\
+	   $(UTILS)/argv_checkers.c $(UTILS)/ft_atol.c $(UTILS)/utils.c $(UTILS)/utils2.c
 
-SMART_OPS_SRCS = smart_operations.c
-SMART_OPS_PATH = smart_operations/
-SMART_OPS_OBJS = $(SMART_OPS_SRCS:.c=.o)
 
-SORT_OPS_SRCS = sorting_operations.c
-SORT_OPS_PATH = sorting_operations/
-SORT_OPS_OBJS = $(SORT_OPS_SRCS:.c=.o)
+OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-PUSH_SWAP_SRCS = utils.c utils2.c argv_checkers.c ft_atol.c main.c
-PUSH_SWAP_PATH = ./
-PUSH_SWAP_OBJS = $(PUSH_SWAP_SRCS:.c=.o)
+ARGS = 3 4 2 5
+ARGS_100 = 42 53 2 89 65 29 22 77 30 14 26 9 83 94 70 88 33 73 8 31 51 40 35 84 67 69 1 87 98 78 15 10 41 85 74 32 13 38 64 11 18 61 5 52 63 24 90 76 25 37 71 6 44 93 19 79 54 80 57 92 3 47 95 36 16 50 27 39 20 81 23 59 60 46 91 7 12 43 49 100 21 99 58 34 97 28 96 48 82 55 17 66 75 72 62 4 45 86 56 68
+ARGS_500 = 264 496 185 490 59 454 323 499 162 491 451 181 334 311 274 434 178 347 351 249 297 390 471 287 309 356 299 176 424 64 25 109 406 84 63 170 259 414 333 251 365 14 437 29 141 224 207 340 75 237 441 128 12 289 121 318 45 227 343 6 134 427 69 304 187 483 489 290 200 79 81 349 303 140 189 231 378 131 455 358 247 319 147 368 465 265 210 160 271 344 440 1 479 175 269 228 198 348 161 47 4 302 89 235 180 72 42 38 362 37 40 345 3 305 55 163 77 252 103 253 82 95 203 377 294 404 193 408 282 495 20 354 410 26 448 66 371 300 108 422 213 208 219 412 306 316 486 0 76 327 71 199 341 460 462 367 262 433 65 156 457 328 9 41 218 450 202 482 250 8 150 236 360 226 415 149 467 336 429 43 488 144 195 453 87 57 184 275 182 257 191 407 325 51 485 240 398 234 383 129 11 126 417 391 116 223 102 167 332 91 16 114 428 62 168 99 130 392 370 411 478 267 426 395 104 350 124 186 276 409 56 17 165 118 480 194 110 438 74 101 443 284 67 469 492 98 401 154 125 456 105 2 122 171 48 322 254 229 172 307 239 152 405 314 173 439 396 339 256 464 280 487 107 80 279 321 196 169 209 430 342 397 255 361 387 313 148 393 317 214 39 449 119 386 376 452 493 232 15 421 94 132 233 301 192 90 61 97 50 293 216 92 83 447 34 335 13 204 494 7 135 298 273 470 5 113 206 52 127 215 400 145 286 418 136 28 295 329 473 435 285 86 331 222 211 36 183 402 364 22 258 338 461 32 484 373 70 246 436 153 261 21 35 445 481 346 432 330 268 143 54 30 468 337 363 100 46 133 380 44 292 18 31 277 120 27 138 458 476 53 382 19 355 242 385 137 359 444 497 446 324 68 245 217 315 272 263 123 244 459 384 78 188 466 85 326 166 372 197 248 288 230 205 10 58 111 394 369 139 423 33 477 442 389 463 403 174 312 399 474 221 96 260 419 146 498 117 278 159 381 142 106 374 420 353 291 158 190 157 308 281 60 266 431 179 73 352 212 243 296 201 177 310 238 164 472 413 425 112 225 416 379 24 241 320 155 49 93 115 357 375 88 283 23 475 270 151 388 366 220
 
-ARGS =  2 3 1
+# Targets
+NAME = push_swap
 
 all: $(NAME)
 
-$(NAME)	:	$(addprefix $(PUSH_SWAP_PATH), $(PUSH_SWAP_OBJS)) \
-			$(addprefix $(lst_operations_PATH), $(lst_operations_OBJS)) \
-			$(addprefix $(STACK_OPS_PATH), $(STACK_OPS_OBJS)) \
-			$(addprefix $(SMART_OPS_PATH), $(SMART_OPS_OBJS)) \
-			$(addprefix $(SORT_OPS_PATH), $(SORT_OPS_OBJS))
-			@ar rc $(NAME) $(addprefix $(PUSH_SWAP_PATH), $(PUSH_SWAP_OBJS)) \
-						   $(addprefix $(lst_operations_PATH), $(lst_operations_OBJS)) \
-						   $(addprefix $(STACK_OPS_PATH), $(STACK_OPS_OBJS)) \
-						   $(addprefix $(SMART_OPS_PATH), $(SMART_OPS_OBJS)) \
-						   $(addprefix $(SORT_OPS_PATH), $(SORT_OPS_OBJS))
-			@ranlib $(NAME)
+bonus:
 
 clean:
-			@rm -rf $(addprefix $(PUSH_SWAP_PATH), $(PUSH_SWAP_OBJS)) \
-					$(addprefix $(lst_operations_PATH), $(lst_operations_OBJS)) \
-					$(addprefix $(STACK_OPS_PATH), $(STACK_OPS_OBJS)) \
-					$(addprefix $(SMART_OPS_PATH), $(SMART_OPS_OBJS)) \
-					$(addprefix $(SORT_OPS_PATH), $(SORT_OPS_OBJS))
-			@rm -rf main
+		rm -f $(OBJS)
 
-fclean:		clean
-			@$(RM) $(NAME)
+fclean:	clean
+		rm $(NAME)
 
-re:			fclean all
+main:	all
+		./$(NAME) $(ARGS)
 
-main:		$(NAME)
-			$(CC) $(FLAGS) -o main $(NAME)
-			./main $(ARGS)
+100_check:	all
+			./$(NAME) $(ARGS_100)
 
-gdb:		$(NAME)
-			$(CC) $(FLAGS) -o main $(NAME)
-			gdb --args main $(ARGS)
+500_check:	all
+			./$(NAME) $(ARGS_500)
 
-test:		$(NAME)
-			$(CC) $(FLAGS) -o main $(NAME)
-			./main 1 3 2147483648
+gdb:	all
+			gdb --args $(NAME) $(ARGS_500)
 
-tests:		$(NAME)
-			$(CC) $(FLAGS) -o main $(NAME)
-			./main -2147483649 -1 3 2 1
-			./main 2147483648 -1 3 2 1
-			./main --1 3 2 1
-			./main 0 3 2 0
-			./main 01 3 2 0
-			./main 1 3 2147483647
-			./main 1 3 -2147483648
+valgrind_500: 	all
+				valgrind --leak-check=yes ./$(NAME) $(ARGS_100)
 
-.PHONY: all clean fclean re main gdb
+valgrind_500: 	all
+				valgrind --leak-check=yes ./$(NAME) $(ARGS_500)
 
-$(PUSH_SWAP_PATH)%.o:	$(PUSH_SWAP_PATH)%.c
-			$(CC) $(FLAGS) -o $@ -c $<
+lldb_500:	all
+			lldb $(NAME) $(ARGS_500)
 
-$(lst_operations_PATH)%.o:	$(lst_operations_PATH)%.c
-			$(CC) $(FLAGS) -o $@ -c $<
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
 
-$(STACK_OPS_PATH)%.o:	$(STACK_OPS_PATH)%.c
-			$(CC) $(FLAGS) -o $@ -c $<
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(SMART_OPS_PATH)%.o:	$(SMART_OPS_PATH)%.c
-			$(CC) $(FLAGS) -o $@ -c $<
-
-$(SORT_OPS_PATH)%.o:	$(SORT_OPS_PATH)%.c
-			$(CC) $(FLAGS) -o $@ -c $<
+.PHONY: all clean fclean bonus main
